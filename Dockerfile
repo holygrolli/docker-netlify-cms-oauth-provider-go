@@ -1,6 +1,6 @@
 FROM golang as src
 
-RUN git clone -b gomod-travis-goreleaser-integration https://github.com/kishaningithub/netlify-cms-oauth-provider-go.git && \
+RUN git clone https://github.com/grafana/netlify-cms-oauth-provider-go.git && \
     cd netlify-cms-oauth-provider-go && \
     make build-linux
 
