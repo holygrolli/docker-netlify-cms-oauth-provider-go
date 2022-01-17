@@ -1,7 +1,11 @@
+FROM golang as src
+
+RUN git clone -b gomod-travis-goreleaser-integration https://github.com/kishaningithub/netlify-cms-oauth-provider-go.git && \
+    cd netlify-cms-oauth-provider-go && \
+    make build-linux
+
 FROM alpine:3.12
 
-ADD https://github.com/igk1972/netlify-cms-oauth-provider-go/releases/download/0.2.1/netlify-cms-oauth-provider_linux-amd64 /
-
-RUN chmod +x /netlify-cms-oauth-provider_linux-amd64
+COPY --from=src /go/netlify-cms-oauth-provider-go/bin/netlify-cms-oauth-provider_linux-amd64 /
 
 CMD ["/netlify-cms-oauth-provider_linux-amd64"]
